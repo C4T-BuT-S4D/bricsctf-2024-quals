@@ -1,0 +1,8 @@
+47a48,50
+> extern PyObject* PyInit_zlib(void);
+> extern PyObject* PyInit__ctypes(void);
+> extern PyObject* PyInit__struct(void);
+81a85,87
+>     {"zlib", PyInit_zlib},
+>     {"_ctypes", PyInit__ctypes},
+>     {"_struct", PyInit__struct},
