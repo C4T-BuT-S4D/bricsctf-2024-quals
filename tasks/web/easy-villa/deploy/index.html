@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>King of the Villa</title>
+        <meta charset="utf-8">
+        <style>
+            body {
+                color: #223311;
+                font-size: 3vh;
+                font-weight: bolder;
+                background: #009922;
+            }
+            h1 {
+                font-size: 5vh;
+                margin-left: 10vw;
+            }
+            span {
+                color: #79573a;
+                text-decoration: underline;
+            }
+            label, input, button {
+                font-size: 4vh;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+function load() {
+    return fetch('/villa', {
+        method: 'GET',
+        mode: 'no-cors',
+    }).then(
+        res => res.text()
+    ).then(
+        text => { 
+            document.getElementById('villa').innerHTML = text;
+            document.getElementById('villa').style.opacity = 1;
+        }
+    );
+}
+
+function update() {
+    document.getElementById('villa').style.opacity = 0.5;
+
+    return fetch('/villa', {
+        method: 'POST',
+        body: document.getElementById('owner').value,
+        mode: 'no-cors',
+    });
+}
+
+setInterval(load, 2000);
+        </script>
+        <div id="villa"></div>
+        <label for="owner">your name: </label>
+        <input type="text" placeholder="anonymous" id="owner">
+        <button onclick="update()">send</button>
+    </body>
+</html>
