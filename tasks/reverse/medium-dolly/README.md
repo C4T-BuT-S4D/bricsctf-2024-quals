@@ -2,7 +2,7 @@
 
 ## Description
 
-> TODO
+> Dolly (5 July 1996 – 14 February 2003) was the first mammal that was cloned from an adult somatic cell. She was cloned using the process of nuclear transfer from a cell taken from a mammary gland. Her cloning proved that a cloned organism could be produced from a mature cell from a specific body part.
 
 ## Public archive
 
