@@ -1,14 +1,9 @@
-FROM ubuntu:latest
+FROM python:3.12
 
 RUN apt-get update -yyq && apt-get upgrade -yyq
 RUN apt install socat -yyq
-RUN apt-get install -y \
-    python3 \
-    python3-pip \
-    && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -M -s /bin/false ctf
-RUN pip install pwntools --break-system-packages
 
 COPY server.py flag.txt entrypoint.sh /
 

@@ -2,7 +2,6 @@
 import sys
 import os
 import base64
-import pwn
 
 MAX_USER_INPUT = 76
 
@@ -13,7 +12,7 @@ def checkElf(data: bytes) -> bool:
         return False
     if data[0x10] != 0x2:
         return False
-    
+
     return True
 
 def main():
@@ -35,11 +34,8 @@ def main():
     fd.write(elf_data)
     fd.close()
 
-    print("@DEBUG@ filename {}".format(filename))
-
-    os.system("chmod +x {}".format(filename))
-    io = pwn.process(filename)
-    io.interactive()
+    os.chmod(filename, 0o755)
+    os.execve(filename, [filename], {})
 
 if __name__ == "__main__":
     main()
