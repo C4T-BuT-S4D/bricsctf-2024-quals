@@ -11,7 +11,7 @@
 
 ## Public archive
 
-- [public/shELFing.tar.gz](public/shELFing.tar.gz)
+- [public/shelfing.tar.gz](public/shelfing.tar.gz)
 
 ## Deploy
 
