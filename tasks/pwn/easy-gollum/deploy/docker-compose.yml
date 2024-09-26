@@ -1,6 +1,8 @@
 services:
   gollum:
     build: .
+    platform: linux/amd64
+    image: ${REGISTRY}easy-gollum
     restart: unless-stopped
     ports:
       - 17172:31337

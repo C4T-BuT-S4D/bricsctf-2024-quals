@@ -1,6 +1,8 @@
 services:
   chains:
     build: .
+    platform: linux/amd64
+    image: ${REGISTRY}medium-chains
     restart: unless-stopped
     ports:
       - 17173:31337

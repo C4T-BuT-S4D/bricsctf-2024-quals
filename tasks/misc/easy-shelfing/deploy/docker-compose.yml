@@ -1,8 +1,8 @@
-version: '2.2'
-
 services:
   shelfing:
     build: service
+    platform: linux/amd64
+    image: ${REGISTRY}easy-shelfing
     restart: unless-stopped
     ports:
       - 18181:31337

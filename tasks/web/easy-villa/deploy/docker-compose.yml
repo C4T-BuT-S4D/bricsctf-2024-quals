@@ -1,6 +1,8 @@
 services:
   villa:
     build: .
+    platform: linux/amd64
+    image: ${REGISTRY}easy-villa
     restart: unless-stopped
     ports:
       - 17171:8080
