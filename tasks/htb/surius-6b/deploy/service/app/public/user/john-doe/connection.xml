@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<configuration version="1.0">
+  <database table="bebriksoid">
+    <param>
+      <name>dbport</name>
+      <value>None</value>
+    </param>
+    <param>
+      <name>username</name>
+      <value>ozon1337games</value>
+    </param>
+    <param>
+      <name>password</name>
+      <value>0zOnT3rP3lUNamV3l3l</value>
+    </param>
+  </database>
+</configuration>

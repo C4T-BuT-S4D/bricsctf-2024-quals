@@ -1,0 +1,17 @@
+version: '2.2'
+
+services:
+  surius6b-user:
+    build: service
+    restart: unless-stopped
+    ports:
+      - 21211:4567
+    cpus: 1
+    pids_limit: 512
+    mem_limit: 256M
+    memswap_limit: 256M
+    ulimits:
+      nofile:
+        soft: 32768
+        hard: 32768
+    stop_grace_period: 3s
