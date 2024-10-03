@@ -2,7 +2,7 @@
 
 ## Description
 
-> Dedicated to each of those whose brain begins to decompose before the heart
+> À tous ceux dont le cerveau se décomposera avant le cœur.
 > 
 
 ## Public archive

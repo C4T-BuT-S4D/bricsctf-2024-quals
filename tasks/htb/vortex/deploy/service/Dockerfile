@@ -7,7 +7,7 @@ RUN useradd -m -s /bin/bash xetrov
 RUN echo "xetrov:KekosikIsNotMemosik!@1234" | chpasswd
 RUN echo "root:tequieroelizasoloati" | chpasswd
 
-COPY backuper entrypoint.sh /opt/
+COPY backupper entrypoint.sh /opt/
 COPY user.txt /home/xetrov/
 COPY system.txt /root/
 COPY db.conf /home/xetrov/
@@ -18,18 +18,18 @@ COPY cli /opt/cli
 RUN chmod ugo+rw /opt/cli
 RUN chown xetrov:xetrov /opt/cli
 
-RUN chmod 700 /home/xetrov/user.txt
+RUN chmod 400 /home/xetrov/user.txt
 RUN chown xetrov:xetrov /home/xetrov/user.txt
 
-RUN chmod 700 /home/xetrov/db.conf
+RUN chmod 600 /home/xetrov/db.conf
 RUN chown xetrov:xetrov /home/xetrov/db.conf
 
-RUN chmod 700 /root/system.txt
+RUN chmod 400 /root/system.txt
 
-RUN chmod ugo+x /opt/backuper
+RUN chmod ugo+x /opt/backupper
 RUN chmod ugo+x /opt/cli/cli
 RUN chmod ugo+x /opt/entrypoint.sh
-RUN /opt/backuper
+RUN /opt/backupper
 
 RUN service ssh start
 
