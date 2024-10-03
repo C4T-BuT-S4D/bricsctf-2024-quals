@@ -1,0 +1,68 @@
+.ViewMessagePage {
+    width: 100%;
+}
+
+.ViewMessagePage-Header {
+    width: 100%;
+    border-bottom: 2px solid gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ViewMessagePage-Title {
+    font-size: xx-large;
+    font-style: italic;
+    padding: 10px;
+}
+
+.ViewMessagePage-Container {
+    display: grid;
+    justify-content: center;
+}
+
+.ViewMessagePage-Container .Error {
+    margin-bottom: 20px;
+}
+
+.ViewMessagePage-Buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.Message {
+    border: 2px gray solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 500px;
+}
+
+.Message-Title {
+    font-size: xx-large;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Message-Author {
+    font-size: larger;
+    color: gray;
+    margin-bottom: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-style: italic;
+    margin-left: 20px;
+}
+
+.Message-Author::before {
+    content: 'from ';
+}
+
+.Message-Content {
+    font-size: larger;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+}

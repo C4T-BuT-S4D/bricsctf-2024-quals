@@ -1,0 +1,17 @@
+.NewMessageForm {
+    width: 500px;
+}
+
+.NewMessageForm .Field {
+    margin-bottom: 20px;
+}
+
+.NewMessageForm .Error {
+    margin-bottom: 20px;
+}
+
+.NewMessageForm-Buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}

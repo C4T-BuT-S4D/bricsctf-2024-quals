@@ -1,0 +1,13 @@
+.LoginForm {
+    width: 500px;
+}
+
+.LoginForm .Field {
+    margin-bottom: 20px;
+}
+
+.LoginForm-Buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}

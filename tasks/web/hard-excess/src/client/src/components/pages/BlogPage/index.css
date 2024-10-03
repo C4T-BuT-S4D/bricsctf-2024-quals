@@ -1,0 +1,47 @@
+.BlogPage {
+    width: 100%;
+}
+
+.BlogPage-Header {
+    width: 100%;
+    border-bottom: 2px solid gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.BlogPage-Title {
+    font-size: xx-large;
+    font-style: italic;
+    padding: 10px;
+}
+
+.BlogPage-Container {
+    display: grid;
+    justify-content: center;
+}
+
+.BlogPage-Links {
+    width: 500px;
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+.BlogPage .Link {
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.BlogPage .Link::before {
+    content: '>';
+    font-size: medium;
+    margin-right: 10px;
+}
+
+.BlogPage-Buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,13 @@
+.Link {
+    display: block;
+}
+
+.Link a {
+    color: black;
+    text-decoration: underline;
+}
+
+.Link a:visited {
+    color: black;
+    text-decoration: underline;
+}

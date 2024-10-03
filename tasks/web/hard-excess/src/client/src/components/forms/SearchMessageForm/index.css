@@ -1,0 +1,17 @@
+.SearchMessageForm {
+    width: 500px;
+}
+
+.SearchMessageForm .Field {
+    margin-bottom: 20px;
+}
+
+.SearchMessageForm .Error {
+    margin-bottom: 20px;
+}
+
+.SearchMessageForm-Buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}

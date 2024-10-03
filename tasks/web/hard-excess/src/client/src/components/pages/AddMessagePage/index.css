@@ -1,0 +1,24 @@
+.AddMessagePage {
+    width: 100%;
+}
+
+.AddMessagePage-Header {
+    width: 100%;
+    border-bottom: 2px solid gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.AddMessagePage-Title {
+    font-size: xx-large;
+    font-style: italic;
+    padding: 10px;
+}
+
+.AddMessagePage-Container {
+    margin-top: 20px;
+    display: grid;
+    justify-content: center;
+}
