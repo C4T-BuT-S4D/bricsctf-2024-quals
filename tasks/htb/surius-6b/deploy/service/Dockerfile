@@ -14,10 +14,10 @@ ADD app /opt/app
 COPY escape /opt/
 
 RUN chmod u+s /opt/escape
-RUN chmod 700 /home/ozon1337games/user.txt
+RUN chmod 600 /home/ozon1337games/user.txt
 RUN chown ozon1337games:ozon1337games /home/ozon1337games/user.txt
 
-RUN chmod 700 /root/system.txt
+RUN chmod 600 /root/system.txt
 
 RUN chmod ugo+x /opt/entrypoint.sh
 
