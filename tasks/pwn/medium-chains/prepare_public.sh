@@ -3,16 +3,10 @@
 set -ex
 
 rm -rf chains public/chains.tar.gz
-mkdir -p chains/src chains/deploy
+mkdir -p chains
 
-cp deploy/chains chains/deploy/
-cp deploy/docker-compose.yml chains/deploy/
-cp deploy/Dockerfile chains/deploy/
-cp deploy/entrypoint.sh chains/deploy/
-
-echo "flag{example}" > chains/deploy/flag.txt
-
-cp -R src chains/
+cp -R deploy chains/deploy
+cp -R src chains/src
 
 tar -cvf chains.tar ./chains/* && gzip -9 chains.tar
 mv chains.tar.gz public/

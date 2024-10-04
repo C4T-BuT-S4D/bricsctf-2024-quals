@@ -4,7 +4,9 @@ RUN apt update && apt install -y socat
 
 WORKDIR /tmp/chains
 
-COPY flag.txt chains entrypoint.sh ./
+RUN chown nobody:nogroup ./
+
+COPY chains entrypoint.sh ./
 
 RUN chmod +x ./chains ./entrypoint.sh
 

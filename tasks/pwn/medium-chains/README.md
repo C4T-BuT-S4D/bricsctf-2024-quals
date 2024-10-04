@@ -71,9 +71,3 @@ The indended exploitation is following:
 6. write the ROP-chain and call `system("/bin/sh")`
 
 Example solver: [solution/sploit.py](solution/sploit.py)
-
-## Flag
-
-```
-brics+{God_b1ess_unS0rtEd_b1N}
-```
