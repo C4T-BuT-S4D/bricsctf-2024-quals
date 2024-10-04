@@ -1,8 +1,8 @@
-version: '2.2'
-
 services:
   vortex-user:
     build: service
+    platform: linux/amd64
+    image: ${REGISTRY}vortex-user
     restart: unless-stopped
     ports:
       - 19191:31337

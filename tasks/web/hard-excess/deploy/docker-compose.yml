@@ -1,6 +1,8 @@
 services:
   excess:
     build: .
+    platform: linux/amd64
+    image: ${REGISTRY}hard-excess
     restart: unless-stopped
     ports:
       - 17174:31337

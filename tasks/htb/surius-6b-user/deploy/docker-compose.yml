@@ -1,8 +1,8 @@
-version: '2.2'
-
 services:
   surius6b-user:
     build: service
+    platform: linux/amd64
+    image: ${REGISTRY}surius-6b-user
     restart: unless-stopped
     ports:
       - 21211:4567

@@ -2,6 +2,7 @@ services:
   ydfcode:
     build: .
     platform: linux/amd64
+    image: ${REGISTRY}hard-mlgoesbrr
     restart: unless-stopped
     ports:
       - 4224:8000
