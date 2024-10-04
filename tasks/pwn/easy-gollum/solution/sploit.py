@@ -52,7 +52,7 @@ def exit(io: pwn.tube) -> None:
 
 def main() -> None:
     IP = sys.argv[1] if len(sys.argv) > 1 else 'localhost'
-    PORT = 17172
+    PORT = int(sys.argv[2]) if len(sys.argv) > 2 else 17172
 
     io = pwn.remote(IP, PORT)
 

@@ -4,7 +4,9 @@ RUN apt update && apt install -y socat
 
 WORKDIR /tmp/gollum
 
-COPY flag.txt gollum entrypoint.sh ./
+RUN chown nobody:nogroup ./
+
+COPY gollum entrypoint.sh ./
 
 RUN chmod +x ./gollum ./entrypoint.sh
 

@@ -194,9 +194,3 @@ Since there is no PIE we already know the address of the target function. So we 
 Example solver: [solution/sploit.py](solution/sploit.py)
 
 *Note: the intended solution doesn't require a searching for the specific bug in Go compiler since the trigger could be noticed by DEBUG logging. But there is an issue for this bug: https://github.com/golang/go/issues/54456*
-
-## Flag
-
-```
-brics+{they_sh0uld_rewr1te_Go_in_Rust_idk}
-```

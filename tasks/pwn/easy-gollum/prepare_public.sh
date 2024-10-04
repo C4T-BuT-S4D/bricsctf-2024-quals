@@ -3,16 +3,10 @@
 set -ex
 
 rm -rf gollum public/gollum.tar.gz
-mkdir -p gollum/src gollum/deploy
+mkdir -p gollum
 
-cp deploy/docker-compose.yml gollum/deploy/
-cp deploy/Dockerfile gollum/deploy/
-cp deploy/entrypoint.sh gollum/deploy/
-cp deploy/gollum gollum/deploy/
-
-echo "flag{example}" > gollum/deploy/flag.txt
-
-cp -R src gollum/
+cp -R deploy gollum/deploy
+cp -R src gollum/src
 
 tar -cvf gollum.tar ./gollum/* && gzip -9 gollum.tar
 mv gollum.tar.gz public/
