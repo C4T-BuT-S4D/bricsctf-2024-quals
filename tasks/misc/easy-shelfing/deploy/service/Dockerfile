@@ -9,7 +9,7 @@ COPY server.py flag.txt entrypoint.sh /
 
 RUN chmod ugo+x /server.py
 RUN chmod ugo+x /entrypoint.sh
-RUN chmod ugo+r flag.txt
+RUN chmod ugo+rw flag.txt
 
 USER ctf
 
