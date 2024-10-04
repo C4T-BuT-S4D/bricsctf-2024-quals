@@ -23,11 +23,10 @@ fn generate_enum_definitions(c_name: &String, cat_spec: &CategoricalSpec) -> imp
         let option_stream: proc_macro2::TokenStream = option_str.parse().unwrap();
         let option_name = format_ident!("Option{}", it.0.to_string());
         let option_value = *it.0 as isize;
-        let kek = quote! {
+        quote! {
             #option_stream
             #option_name = #option_value
-        };
-        kek
+        }
     });
 
     let enum_name = format_ident!("{}", get_enum_name_for_categorical(c_name));

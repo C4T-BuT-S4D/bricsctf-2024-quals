@@ -17,8 +17,6 @@ import (
 	"strings"
 	"syscall"
 	"time"
-
-	cp "github.com/otiai10/copy"
 )
 
 var addr = flag.String("addr", ":8000", "listen address")
@@ -62,22 +60,12 @@ func copyZipArchieve(zipReader *zip.Reader) (string, error) {
 }
 
 func prepareRustCode(modelPath string) (string, error) {
-	dest, err := os.MkdirTemp("", "programs")
-	if err != nil {
-		return "", fmt.Errorf("error creating temp dir: %w", err)
-	}
-
-	err = cp.Copy(*ydfCodePath, dest)
-	if err != nil {
-		return "", fmt.Errorf("error copying rust code: %w", err)
-	}
-
-	t, err := template.ParseFiles(filepath.Join(dest, "predictor/src/main.rs.tmpl"))
+	t, err := template.ParseFiles(filepath.Join(*ydfCodePath, "predictor/src/main.rs.tmpl"))
 	if err != nil {
 		return "", fmt.Errorf("error parsing template: %w", err)
 	}
 
-	f, err := os.Create(filepath.Join(dest, "predictor/src/main.rs"))
+	f, err := os.Create(filepath.Join(*ydfCodePath, "predictor/src/main.rs"))
 	if err != nil {
 		return "", fmt.Errorf("error creating main.rs file: %w", err)
 	}
@@ -91,7 +79,7 @@ func prepareRustCode(modelPath string) (string, error) {
 		return "", fmt.Errorf("error executing template: %w", err)
 	}
 
-	return dest, nil
+	return *ydfCodePath, nil
 }
 
 func processConnection(ctx context.Context, conn net.Conn) {
@@ -104,24 +92,9 @@ func processConnection(ctx context.Context, conn net.Conn) {
 		return fmt.Fscanf(conn, msg, args...)
 	}
 
-	write("SOLVE THE CAPTCHA FIRST\n")
-	write("2 + 2 = ?\n")
-	var answer string
-
-	_, err := read("%s\n", &answer)
-	if err != nil {
-		write("Error reading input")
-		return
-	}
-
-	if answer != "4" {
-		write("Wrong answer\n")
-		return
-	}
-
-	write("Now send me the number of bytes in your model zip archive\n")
+	write("Send me the number of bytes in your model zip archive\n")
 	var numBytes int
-	_, err = read("%d", &numBytes)
+	_, err := read("%d", &numBytes)
 	if err != nil {
 		write("Error reading input")
 		return
@@ -132,7 +105,7 @@ func processConnection(ctx context.Context, conn net.Conn) {
 		return
 	}
 
-	write("Now send me the zip archive with your model\n")
+	write("Send me the zip archive with your model\n")
 	buf := make([]byte, numBytes)
 	n, err := conn.Read(buf)
 	if err != nil {
@@ -165,17 +138,15 @@ func processConnection(ctx context.Context, conn net.Conn) {
 		write("Error preparing rust code: %v\n", err)
 		return
 	}
-	defer os.RemoveAll(rustDir)
 
 	write("Starting execution\n")
 
 	ctx, cancel := context.WithTimeout(ctx, 1200000*time.Second)
 	defer cancel()
 
-	cmd := exec.CommandContext(ctx, "cargo", "run")
+	cmd := exec.CommandContext(ctx, "cargo", "run", "--release")
 	cmd.Dir = filepath.Join(rustDir, "predictor")
 	cmd.Stdout = conn
-	cmd.Stderr = conn
 	cmd.Stdin = conn
 
 	err = cmd.Run()

@@ -2,7 +2,6 @@ services:
   ydfcode:
     build: .
     platform: linux/amd64
-    # image: ${REGISTRY}easy-shelfing
     restart: unless-stopped
     ports:
       - 4224:8000

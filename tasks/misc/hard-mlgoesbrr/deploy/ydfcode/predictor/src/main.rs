@@ -1,0 +1,39 @@
+use std::io::{self, BufRead};
+
+use ydfmacro::generate_tree;
+
+generate_tree!("/app/example_diabetes_model");
+
+fn main() {
+    println!("Expecting features: [{}]", features_info().join(", "));
+
+    let stdin = io::stdin();
+    for line in stdin.lock().lines() {
+        match line {
+            Ok(line) => {
+                if line.is_empty() {
+                    continue;
+                }
+                if line == "exit" {
+                    break;
+                }
+
+                let input = serde_json::from_str(&line);
+                match input {
+                    Ok(tree) => {
+                        let prediction = predict(&tree); 
+                        println!("{}", prediction);
+                    }
+                    Err(err) => {
+                        println!("Got error reading json: {}\nTry again:\n", err)
+                    }
+                }
+
+
+            },
+            Err(_err) => {
+                break;
+            }
+        }
+    }
+}
