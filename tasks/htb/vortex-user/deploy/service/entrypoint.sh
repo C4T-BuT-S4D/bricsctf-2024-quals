@@ -1,5 +1,5 @@
 #!/bin/bash
-export FLAG=${FLAG:-flag{example_flag}}
+export FLAG=${FLAG:-"flag{example_flag}"}
 echo $FLAG > /home/xetrov/user.txt
 export FLAG=""
 unset FLAG
