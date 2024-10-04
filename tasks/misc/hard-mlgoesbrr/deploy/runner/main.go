@@ -144,7 +144,7 @@ func processConnection(ctx context.Context, conn net.Conn) {
 	ctx, cancel := context.WithTimeout(ctx, 1200000*time.Second)
 	defer cancel()
 
-	cmd := exec.CommandContext(ctx, "cargo", "run", "--release")
+	cmd := exec.CommandContext(ctx, "cargo", "run", "--release", "-j", "1")
 	cmd.Dir = filepath.Join(rustDir, "predictor")
 	cmd.Stdout = conn
 	cmd.Stdin = conn
