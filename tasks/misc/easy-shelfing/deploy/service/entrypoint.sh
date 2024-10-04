@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export FLAG=${FLAG:-flag{example_flag}}
+export FLAG=${FLAG:-"flag{example_flag}"}
 echo $FLAG > flag.txt
 unset FLAG
 
