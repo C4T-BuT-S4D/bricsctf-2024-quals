@@ -23,7 +23,7 @@ def generate_forest_header(path):
     with open(output_file, 'wb') as f:
         f.write(rf.SerializeToString())
     
-def generate_data_spec(path: Path, flag_path: str, flag_len: int):
+def generate_data_spec(path: Path, flag_path: str, char_ind: int):
     output_file = path / SPEC_PATH
     spec = ds_pb.DataSpecification()
     target_column = spec.columns.add()
@@ -35,9 +35,8 @@ def generate_data_spec(path: Path, flag_path: str, flag_len: int):
     poc_column.name = "cat"
     poc_column.type = ds_pb.ColumnType.CATEGORICAL
     items = poc_column.categorical.items
-    for i in range(flag_len):
-        pld = LEAK_FLAG_CHAR.format(option_num=i + 5, index=i, flag_path=flag_path)
-        items[f'char_{i}' + pld].index = 300 + i
+    pld = LEAK_FLAG_CHAR.format(option_num=char_ind + 5, index=char_ind, flag_path=flag_path)
+    items[f'char' + pld].index = 300 + char_ind
     
     with open(output_file, 'wb') as f:
         f.write(spec.SerializeToString())
@@ -102,15 +101,15 @@ def generate_header(path):
     
     
 
-def generate_sploit_tree(path, flag_path, flag_len: int):
+def generate_sploit_tree(path, flag_path, char_ind: int):
     generate_forest_header(path)
-    generate_data_spec(path, flag_path, flag_len)
+    generate_data_spec(path, flag_path, char_ind)
     generate_header(path)
     generate_poc_tree(path, range(1, 255), leak_feature_index=1)
     
-def main(path_to_model: str, flag_path: str, flag_len: int):
+def main(path_to_model: str, flag_path: str, char_ind: int):
     Path(path_to_model).mkdir(parents=True, exist_ok=True)
-    generate_sploit_tree(Path(path_to_model), flag_path, flag_len)
+    generate_sploit_tree(Path(path_to_model), flag_path, char_ind)
 
     with ZipFile(path_to_model + ".zip", 'w') as myzip:
         for file in Path(path_to_model).rglob("*"):

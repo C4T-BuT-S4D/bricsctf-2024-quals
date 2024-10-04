@@ -148,6 +148,7 @@ func processConnection(ctx context.Context, conn net.Conn) {
 	cmd.Dir = filepath.Join(rustDir, "predictor")
 	cmd.Stdout = conn
 	cmd.Stdin = conn
+	cmd.Stderr = conn
 
 	err = cmd.Run()
 	if err != nil {
