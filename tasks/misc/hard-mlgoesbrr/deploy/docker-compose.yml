@@ -2,6 +2,7 @@ services:
   ydfcode:
     build: .
     platform: linux/amd64
+    image: ${REGISTRY}hard-mlgoesbrr
     restart: unless-stopped
     ports:
       - 4224:8000
@@ -11,4 +12,3 @@ services:
     memswap_limit: 2048m
     environment:
       - FLAG=brics+{example}
-    # stop_grace_period: 3s

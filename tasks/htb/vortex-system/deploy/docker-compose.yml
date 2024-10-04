@@ -1,0 +1,17 @@
+services:
+  vortex-system:
+    build: service
+    platform: linux/amd64
+    image: ${REGISTRY}vortex-system
+    restart: unless-stopped
+    ports:
+      - 8686:22
+    cpus: 1
+    pids_limit: 512
+    mem_limit: 256M
+    memswap_limit: 256M
+    ulimits:
+      nofile:
+        soft: 32768
+        hard: 32768
+    stop_grace_period: 3s
