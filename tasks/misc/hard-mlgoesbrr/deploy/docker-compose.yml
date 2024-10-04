@@ -10,4 +10,5 @@ services:
     pids_limit: 8192
     mem_limit: 2048m
     memswap_limit: 2048m
-    # stop_grace_period: 3s
+    environment:
+      - FLAG=brics+{example}

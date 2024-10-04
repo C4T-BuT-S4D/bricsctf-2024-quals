@@ -20,4 +20,6 @@ conn.sendline(b'{"cat": "num_chars"}')
 
 print(conn.recvline().decode())
 
+conn.interactive()
+
 conn.close()

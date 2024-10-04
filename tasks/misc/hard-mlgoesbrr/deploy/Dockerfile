@@ -14,12 +14,16 @@ COPY --from=builder /build/runner /runner
 
 COPY example_diabetes_model example_diabetes_model
 
-COPY flag.txt /flag.txt
 COPY ydfcode ydfcode 
+COPY entrypoint.sh entrypoint.sh
 
 WORKDIR /app/ydfcode
 
 RUN ["cargo", "build", "--release", "--all"]
 
-CMD ["/runner", "-ydf", "/app/ydfcode"]
+RUN chmod +x /app/entrypoint.sh
+
+CMD ["/app/entrypoint.sh"]
+
+
 

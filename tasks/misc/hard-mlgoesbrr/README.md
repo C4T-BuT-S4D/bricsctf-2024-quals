@@ -11,7 +11,7 @@
 
 ## Public archive
 
-- [public/mlgoesbrr.zip](public/mlgoessbrr.zip)
+- [public/mlgoesbrr.zip](public/mlgoessbrr.tar.gz)
 
 ## Deploy
 
@@ -21,11 +21,11 @@ cd deploy && docker compose up --build -d
 
 ## Solution
 
-TODO: detailed solution.
-Example solver: [solution/solve.py](solution/solve.py)
+1. Solution one: leak the flag using decision tree. [solve_leak.py](solution/solve_leak.py)
+2. Solution two: RCE via impl [solve_rce.py](solution/solve_rce.py)
 
 ## Flag
 
 ```
-brics+{D1jQKnPl93mFAWJMXzdqOBohCtw8Z2}
+brics+{example}
 ```

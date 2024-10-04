@@ -17,17 +17,15 @@ conn.recvuntil(b"Expecting features")
 
 conn.recvuntil(b"]\n")
 
-out = []
+pld = {'cat': 'char'}
+conn.sendline(json.dumps(pld).encode())
+num = conn.recvline().decode()
+num = num.strip()
 
-for i in range(int(sys.argv[4])):
-    pld = {'cat': f'char_{i}'}
-    conn.sendline(json.dumps(pld).encode())
-    num = conn.recvline().decode()
-    num = num.strip()
-    out.append(num)
+print(num)
 
-print(''.join([chr(int(x)) for x in out]))
-
+# conn.interactive()
+conn.sendline(b"exit\n")
 
 
 conn.close()
