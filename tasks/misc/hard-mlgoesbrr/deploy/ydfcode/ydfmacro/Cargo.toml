@@ -1,0 +1,16 @@
+[lib]
+proc-macro = true
+
+[package]
+name = "ydfmacro"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+quote = "1.0"
+ydflib = { path = "../ydflib" }
+convert_case = "0.6.0"
+serde = { version = "1.0.210", features = ["derive"]}
+proc-macro2 = "1.0.86"
