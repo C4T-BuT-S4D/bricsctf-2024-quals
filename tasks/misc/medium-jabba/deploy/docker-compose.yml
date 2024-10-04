@@ -2,6 +2,7 @@ services:
   jabba:
     build: .
     platform: linux/amd64
+    image: ${REGISTRY}medium-jabba
     restart: unless-stopped
     ports:
       - 17176:7070
