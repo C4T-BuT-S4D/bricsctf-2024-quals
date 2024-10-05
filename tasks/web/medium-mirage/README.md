@@ -2,7 +2,7 @@
 
 ## Description
 
-> Faster than rushing B!
+> Faster than rushing B.
 
 ## Public archive
 
