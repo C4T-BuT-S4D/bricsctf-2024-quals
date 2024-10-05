@@ -44,9 +44,3 @@ For example the attacker could exploit CSS matcher:
 A line between `'.'` and `'{'` is inserted into the template's code without any modification. The simplest way is using `C.system()` function which runs a shell command in a separate process.
 
 Example solver: [solution/solver.py](solution/solver.py)
-
-## Flag
-
-```
-brics+{well_done_xdxd_6d6095717920f536044efe2aaa9742d6}
-```

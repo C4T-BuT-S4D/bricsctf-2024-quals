@@ -4,20 +4,20 @@ RUN apt update && apt install -y wget unzip git make gcc xxd
 
 WORKDIR /tmp/villa/
 
-RUN chmod 777 /tmp/villa/ \
-    && mkdir /nonexistent/ \
-    && chown nobody:nogroup /nonexistent/
+RUN mkdir /nonexistent/ \
+    && chown nobody:nogroup /tmp/villa/ /nonexistent/
 
 USER nobody:nogroup
 
-RUN wget https://github.com/vlang/v/archive/refs/tags/0.4.7.zip \
-    && unzip 0.4.7.zip \
-    && rm -rf 0.4.7.zip
+RUN wget https://github.com/vlang/v/archive/refs/tags/0.4.8.zip \
+    && unzip 0.4.8.zip \
+    && rm -rf 0.4.8.zip
 
-RUN cd ./v-0.4.7/ && make
+RUN cd ./v-0.4.8/ && make
 
-COPY --chown=nobody:nogroup entrypoint.sh main.v flag.txt *.html ./
+COPY --chown=nobody:nogroup src ./
+COPY --chown=nobody:nogroup entrypoint.sh ./
 
 RUN chmod +x entrypoint.sh
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+CMD [ "./entrypoint.sh" ]

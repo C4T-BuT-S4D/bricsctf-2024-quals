@@ -16,8 +16,6 @@ fn (mut app App) index() vweb.Result {
 fn (mut app App) villa() vweb.Result {
 	if app.req.method == .post {
 		os.write_file('villa.html', $tmpl('template.html')) or { panic(err) }
-
-		return $vweb.html()
 	}
 
 	return $vweb.html()
