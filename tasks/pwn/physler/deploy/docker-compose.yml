@@ -1,0 +1,12 @@
+version: '2.4'
+
+services:
+  physler:
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    ports:
+      - 17002:9000
+    restart: on-failure
+    pids_limit: 1024
+    mem_limit: 2Gb
