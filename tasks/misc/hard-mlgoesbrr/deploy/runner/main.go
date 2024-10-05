@@ -84,6 +84,7 @@ func prepareRustCode(modelPath string) (string, error) {
 
 func processConnection(ctx context.Context, conn net.Conn) {
 	defer conn.Close()
+	conn.SetDeadline(time.Now().Add(5 * time.Minute))
 
 	write := func(msg string, args ...interface{}) {
 		fmt.Fprintf(conn, msg, args...)
@@ -107,7 +108,7 @@ func processConnection(ctx context.Context, conn net.Conn) {
 
 	write("Send me the zip archive with your model\n")
 	buf := make([]byte, numBytes)
-	n, err := conn.Read(buf)
+	n, err := io.ReadFull(conn, buf)
 	if err != nil {
 		write("Error reading input")
 		return
@@ -141,7 +142,7 @@ func processConnection(ctx context.Context, conn net.Conn) {
 
 	write("Starting execution\n")
 
-	ctx, cancel := context.WithTimeout(ctx, 1200000*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Minute)
 	defer cancel()
 
 	cmd := exec.CommandContext(ctx, "cargo", "run", "--release", "-j", "1")
