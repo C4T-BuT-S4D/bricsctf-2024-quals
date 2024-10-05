@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  abobus_msgr:
+  neplox_wallet:
     build: .
     mem_limit: 256M
     memswap_limit: 256M
@@ -9,3 +9,4 @@ services:
     stop_grace_period: 3s
     ports:
       - "18484:31337"
+    image: ${REGISTRY}medium-neplox_wallet

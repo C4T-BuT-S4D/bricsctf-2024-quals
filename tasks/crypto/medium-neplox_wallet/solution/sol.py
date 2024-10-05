@@ -1,4 +1,5 @@
 import os
+import pwn
 
 '''
 if x is int
@@ -54,7 +55,7 @@ PYHASH_PRIME = 2305843009213693951
 blocks = []
 
 # 9^ctr 
-ctr = 20
+ctr = 18
 for i in range(ctr):
     sub_block = []
     while len(sub_block) < 2:
@@ -157,12 +158,20 @@ def gen_target_element_hash_pair(prefix1, prefix2, acc=2870177450012600261):
     else:
         return (-1, -1)
 
+pwn.context.log_level='debug'
+
 pref_pad_pair = (-1, 1)
-while pref_pad_pair == (-1, 1):
-    pyhash_pref1 = 1338149540038782991#b'Plox!'
-    pyhash_pref2 = -8846406621200006365#b'GigaPlox!'
+while True:
+    io = pwn.remote("127.0.0.1", 18484)
+    pyhash_pref1 = int(io.recvline()[len("hash(b'Plox!')= "):])#b'Plox!'
+    pyhash_pref2 =  int(io.recvline()[len("hash(b'GigaPlox!')= "):])#b'GigaPlox!'
 
     pref_pad_pair = gen_target_element_hash_pair(b'Plox!', b'GigaPlox!')
+    if pref_pad_pair == (-1, -1):
+        io.close()
+        continue
+    break
+print(pref_pad_pair)
 
 m1_pad = pref_pad_pair[0].to_bytes(8, 'big')
 m2_pad = pref_pad_pair[1].to_bytes(8, 'big')
@@ -171,9 +180,10 @@ m2_pad = pref_pad_pair[1].to_bytes(8, 'big')
 m1 = do_preimage(b'Neplox' + m1_pad)
 m2 = do_preimage(b'GigaNeplox' + m2_pad)
 
-print(m1_pad.hex()+m1.hex())
-print(m2_pad.hex()+m2.hex())
+io.sendlineafter('input m1 hex: ', m1_pad.hex()+m1.hex())
+io.sendlineafter('input m2 hex: ', m2_pad.hex()+m2.hex())
 
+print(io.recv())
 # we want get zero in two first blocks like hash((b'Neplox', m1_blocks[0])) = hash((b'GigaPlox', m2_blocks[1])) = 0 (or another constant)
 
-
+io.close()
