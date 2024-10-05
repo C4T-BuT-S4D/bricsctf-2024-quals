@@ -7,5 +7,5 @@ WORKDIR /code
 
 COPY . /code/
 
-RUN sudo chmod +x entrypoint.sh
+RUN sudo chmod +x entrypoint.sh easy.sage
 ENTRYPOINT [ "./entrypoint.sh" ]
