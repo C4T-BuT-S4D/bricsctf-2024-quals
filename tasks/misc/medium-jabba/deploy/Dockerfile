@@ -15,6 +15,4 @@ COPY --from=builder /home/gradle/src/app/build/install/app /tmp/app
 
 WORKDIR /tmp/app
 
-ENV JAVA_OPTS="-Xms512M -Xmx512M"
-
 CMD ["./bin/app"]
