@@ -7,5 +7,5 @@ WORKDIR /code
 
 COPY . /code/
 
-RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh neplox_wallet.py
 ENTRYPOINT [ "./entrypoint.sh" ]
