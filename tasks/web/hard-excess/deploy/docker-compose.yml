@@ -8,11 +8,6 @@ services:
       - 17174:31337
       - 17175:31338
     cpus: 2
-    pids_limit: 512
     mem_limit: 1G
     memswap_limit: 1G
-    ulimits:
-      nofile:
-        soft: 32768
-        hard: 32768
     stop_grace_period: 3s
