@@ -1,12 +1,11 @@
-version: '3'
-
 services:
   BigBlackCode:
     build: .
+    platform: linux/amd64
+    image: ${REGISTRY}easy-bigblackcode
     mem_limit: 256M
     memswap_limit: 256M
     restart: unless-stopped
     stop_grace_period: 3s
     ports:
       - "13312:31337"
-    image: ${REGISTRY}easy-bigblackcode

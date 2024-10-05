@@ -1,12 +1,11 @@
-version: '3'
-
 services:
   neplox_wallet:
     build: .
+    platform: linux/amd64
+    image: ${REGISTRY}medium-neplox_wallet
     mem_limit: 256M
     memswap_limit: 256M
     restart: unless-stopped
     stop_grace_period: 3s
     ports:
       - "18484:31337"
-    image: ${REGISTRY}medium-neplox_wallet
