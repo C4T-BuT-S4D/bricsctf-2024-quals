@@ -4,7 +4,7 @@ services:
       context: ./service
       dockerfile: Dockerfile
     platform: linux/amd64
-    image: ${REGISTRY}physler
+    image: ${REGISTRY}hard-physler
     ports:
       - 17002:9000
     restart: on-failure
