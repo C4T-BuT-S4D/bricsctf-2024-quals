@@ -1,0 +1,12 @@
+services:
+  mirage:
+    build: .
+    platform: linux/amd64
+    image: ${REGISTRY}medium-mirage
+    restart: unless-stopped
+    ports:
+      - 17177:31338
+    cpus: 2
+    mem_limit: 1G
+    memswap_limit: 1G
+    stop_grace_period: 3s
