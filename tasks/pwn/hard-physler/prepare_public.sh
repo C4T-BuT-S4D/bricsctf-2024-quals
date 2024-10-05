@@ -15,6 +15,7 @@ cp deploy/service/bzImage physler/service/
 cp dev/physler.c physler/
 cp dev/physler.h physler/
 cp dev/Makefile physler/
+cp deploy/service/deploy_manager.py physler/service/
 
 tar -cvf physler.tar ./physler/* && gzip -9 physler.tar
 mv physler.tar.gz public/
