@@ -1,16 +1,16 @@
 ## Intended Solution
 You have matrices `A` and `B`
-$$
-A = \begin{bmatrix}
+
+$$A = \begin{bmatrix}
 1 & 2 & 3\\
 4 & 5 & 6\\
 7 & x & 9 
-\end{bmatrix}
-$$
+\end{bmatrix}$$
+
 Where `x` position choices randomly
-$$
-B = R_{z}(\gamma)\times R_{x}(\alpha)\times A\times R_{y}(\beta)
-$$
+
+$$B = R_{z}(\gamma)\times R_{x}(\alpha)\times A\times R_{y}(\beta)$$
+
 Where `R` - is [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix).
 Now you need to recover `x`.
 
