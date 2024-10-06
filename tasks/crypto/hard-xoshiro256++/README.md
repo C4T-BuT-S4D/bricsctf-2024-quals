@@ -11,8 +11,18 @@
 
 - [public/xoshiro256++.tar.gz](public/xoshiro256++.tar.gz)
 
-## Deploy
-
 ## Solution
 
-Example solver: [solution/](solution/)
+1. install sagemath
+
+2. `g++ -o hax hax.cpp -std=c++20`
+
+3. `./hax < output.txt`
+
+Example solver: [solution/3.py](solution/3.py) & [solution/hax.cpp](solution/hax.cpp)
+
+## Flag
+
+```
+brics+{s3y3mbzgar1kvoqy08m2nygiddrhex2t}
+```
