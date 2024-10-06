@@ -18,4 +18,4 @@ cd deploy && docker compose up --build -d
 
 ## Solution
 
-Example solver: [solution/client.c](solution/clint.c)
+Example solver: [solution/client.c](solution/client.c)
