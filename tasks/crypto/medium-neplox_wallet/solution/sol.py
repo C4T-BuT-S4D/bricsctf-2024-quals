@@ -1,20 +1,9 @@
 import os
 import pwn
 
-'''
-if x is int
-hash(x) = hash(x) %2305843009213693951
-
-Задача сейчас:
-    hash([i for i in x]) = hash([j for j in y]) && crc32(x) == crc32(y)
-    решается через то что hash(i) = hash(i+2305...)
-    и дальше mitm
-Задача потом:
-    mmh3(x) = mmh3(y) && crc32(x) = crc32(y)
-    нужно понять биекция ли mmh3. Если да, то пизда
-'''
-
-## PART 1
+#
+# PART 1
+# CRC32 collision
 
 def create_table():
     a = []
@@ -28,9 +17,9 @@ def create_table():
     return a
 
 crc_table = create_table()
-inv_table = [None]*256
+inv_table = [0 for i in range(256)]
 for i, x in enumerate(crc_table):
-    inv_table[x>>24] = (x << 8) ^ i
+    inv_table[x >> 24] = (x << 8) ^ i
 
 
 def crc32_my(buffer, crc=0):
@@ -54,7 +43,7 @@ def inverse_crc32_my(buffer, crc):
 PYHASH_PRIME = 2305843009213693951
 blocks = []
 
-# 9^ctr 
+# 9^(ctr/2)
 ctr = 18
 for i in range(ctr):
     sub_block = []
@@ -70,27 +59,28 @@ for i in range(ctr):
 forward_blocks = blocks[:ctr//2]
 backward_blocks = blocks[ctr//2:][::-1]
 
-def search_forwards(table, sum, history=[], idx=0):
-    if idx >= len(forward_blocks):
-        table[sum] = history
-        return
-    for i, child in enumerate(forward_blocks[idx]):
-        search_forwards(table, crc32_my(child, sum), history + [i], idx+1)
 
-def search_backwards(table, sum, history=[], idx=0):
-    if idx >= len(backward_blocks):
-        if sum in table:
-            return table[sum] + history[::-1]
+def fill_table_forward(table, crc, path = [], index=0):
+    if index >= len(forward_blocks):
+        table[crc] = path
         return
-    for i, child in enumerate(backward_blocks[idx]):
-        res = search_backwards(table, inverse_crc32_my(child, sum), history + [i], idx+1)
+    for i, child in enumerate(forward_blocks[index]):
+        fill_table_forward(table, crc32_my(child, crc), path + [i], index + 1)
+
+def search_backwards(table, crc, history=[], index=0):
+    if index >= len(backward_blocks):
+        if crc in table:
+            return table[crc] + history[::-1]
+        return
+    for i, child in enumerate(backward_blocks[index]):
+        res = search_backwards(table, inverse_crc32_my(child, crc), history + [i], index + 1)
         if res is not None:
             return res
 
 def do_preimage(prefix):
     table = {}
-    search_forwards(table, crc32_my(prefix))
-    print('LOG: search forward ended')
+    fill_table_forward(table, crc32_my(prefix))
+    print('LOG: fill_table_forward ended')
     path = search_backwards(table, 0x1337)
     assert path is not None
 
@@ -98,8 +88,9 @@ def do_preimage(prefix):
     result_msg = prefix + msg_append
     return msg_append
 
-## PART 2
-
+#
+# PART 2
+# PyHash collision
 
 def hash(x):
     if type(x) is int:
@@ -157,6 +148,10 @@ def gen_target_element_hash_pair(prefix1, prefix2, acc=2870177450012600261):
         return (0, lane_delta)
     else:
         return (-1, -1)
+
+#
+# PART 3
+# SUBMIT FLAG ON SERVER
 
 pwn.context.log_level='debug'
 
