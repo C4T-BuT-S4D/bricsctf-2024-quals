@@ -125,11 +125,13 @@ def emulate_synchronize(length: int) -> int:
     return consumed
 
 
-def synchronize(session: requests.Session, length: int) -> None:
+def synchronize(session: requests.Session, length: int, ws_consume_ping) -> None:
     count = 0
     target = 2 * INT_MAX_VALUE + 2 - length
 
     for i in range(1 << 64):
+        ws_consume_ping()
+
         if i > 1:
             ws_delete_sesson = ws_connect(session)
             results(ws_delete_sesson, STEP_SIZE)
@@ -173,16 +175,19 @@ def main() -> None:
     print(f'seed: {seed}')
 
     ws_consume_session = ws_connect(session)
+    ws_consume_ping = lambda: ws_consume_session.ping("xxx")
 
     start = 0
 
     for i in range(coins):
+        ws_consume_ping()
+
         print(f'balance: {i} / {coins}')
 
         size = 10_000
 
         skipped = skip_results(session, 1 << 28)
-        synchronize(session, size + skipped)
+        synchronize(session, size + skipped, ws_consume_ping)
         consumed = emulate_synchronize(size + skipped)
         start += consumed + skipped
 
